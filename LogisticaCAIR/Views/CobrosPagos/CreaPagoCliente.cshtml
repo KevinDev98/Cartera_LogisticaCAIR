@@ -1,0 +1,267 @@
+﻿@model LogisticaCAIR.Models.CobroCliente
+
+@{
+    ViewData["Title"] = "CreaPagoCliente";
+}
+
+<h1 class="text-center card-title bg-light" style="font-family:'Comic Sans MS'">Crear nuevo pago de cliente</h1>
+
+<hr />
+@*<div class="row">
+        <div class="col-md-4">
+            <form asp-action="CreaPagoCliente">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Cliente" class="control-label"></label>
+                    <select asp-for="Cliente" class="form-control" asp-items="ViewBag.Cliente"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Monto" class="control-label"></label>
+                    <input asp-for="Monto" class="form-control" />
+                    <span asp-validation-for="Monto" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TipoMoneda" class="control-label"></label>
+                    <input asp-for="TipoMoneda" class="form-control" />
+                    <span asp-validation-for="TipoMoneda" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="BancoEmisor" class="control-label"></label>
+                    <input asp-for="BancoEmisor" class="form-control" />
+                    <span asp-validation-for="BancoEmisor" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NumCta" class="control-label"></label>
+                    <input asp-for="NumCta" class="form-control" />
+                    <span asp-validation-for="NumCta" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DteRegistro" class="control-label"></label>
+                    <input asp-for="DteRegistro" class="form-control" />
+                    <span asp-validation-for="DteRegistro" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DtePago" class="control-label"></label>
+                    <input asp-for="DtePago" class="form-control" />
+                    <span asp-validation-for="DtePago" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Pagado" class="control-label"></label>
+                    <input asp-for="Pagado" class="form-control" />
+                    <span asp-validation-for="Pagado" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="UrlDocumento" class="control-label"></label>
+                    <input asp-for="UrlDocumento" class="form-control" />
+                    <span asp-validation-for="UrlDocumento" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Verificador" class="control-label"></label>
+                    <select asp-for="Verificador" class="form-control" asp-items="ViewBag.Verificador"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Tarifa" class="control-label"></label>
+                    <select asp-for="Tarifa" class="form-control" asp-items="ViewBag.Tarifa"></select>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>*@
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<div class="table table-borderless table-responsive bg-light">
+    <form class="active container-fluid table" asp-action="CobroClientes">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <table class="table-responsive">
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <label asp-for="DtePago" class="control-label" style="font-family:'Comic Sans MS'"> Fecha de pago</label>
+                            <input asp-for="DtePago" class="form-control" asp-format="{0:dd/MM/yyyy}" type="date" />
+                            <span asp-validation-for="DtePago" class="text-danger"></span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <label asp-for="Verificador" class="control-label" style="font-family:'Comic Sans MS'">Usuario que verifica Pago</label>
+                            <select asp-for="Verificador" class="form-control" asp-items="ViewBag.Verificador"></select>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <label class="control-label" style="font-family:'Comic Sans MS'">Concepto a pagar</label>
+                            <input asp-for="ConceptoAPagar" class="form-control focus" type="text" />
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <label asp-for="Cliente" class="control-label" style="font-family:'Comic Sans MS'"></label>
+                            <select asp-for="Cliente" class="form-control" asp-items="ViewBag.Clientes"></select>
+                            <span asp-validation-for="Cliente" class="text-danger"></span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <label asp-for="TipoMoneda" class="control-label" style="font-family:'Comic Sans MS'">Divisa</label>
+                            <select asp-for="TipoMoneda" class="form-control" onchange="OcultaCampos();" id="DDLTP">
+                                <option value="N/A">Seleccione</option>
+                                <option value="MXN">PESO</option>
+                                <option value="DLS">DOLAR</option>
+                            </select>
+                            <span asp-validation-for="TipoMoneda" class="text-danger"></span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <label asp-for="Subtotal" class="control-label" style="font-family:'Comic Sans MS'" id="lblSubtotal"> Monto de pago (subtotal)</label>
+                            <input asp-for="Subtotal" class="form-control" id="txtSubtotal" onchange="CalculaCampos();" />
+                            <span asp-validation-for="Subtotal" class="text-danger"></span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>                    
+                    <td>
+                        <div class="form-group">
+                            <label asp-for="Iva" class="control-label" style="font-family:'Comic Sans MS'" id="lbliva"> IVA</label>
+                            <input asp-for="Iva" class="form-control" id="txtiva" readonly="readonly" />
+                            <span asp-validation-for="Iva" class="text-danger"></span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <label asp-for="Retencion" class="control-label" style="font-family:'Comic Sans MS'" id="lblretencion"> Retención</label>
+                            <input asp-for="Retencion" class="form-control" id="txtretencion" readonly="readonly" />
+                            <span asp-validation-for="Retencion" class="text-danger"></span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <label asp-for="MontoTotal" class="control-label" style="font-family:'Comic Sans MS'"> Monto total de pago</label>
+                            <input asp-for="MontoTotal" class="form-control" id="txtotal" readonly="readonly" />
+                            <span asp-validation-for="MontoTotal" class="text-danger"></span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <label asp-for="NumCta" class="control-label" style="font-family:'Comic Sans MS'"> RFC</label>
+                            <input asp-for="NumCta" class="form-control" />
+                            <span asp-validation-for="NumCta" class="text-danger"></span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <label asp-for="BancoEmisor" class="control-label" style="font-family:'Comic Sans MS'">Banco Emisor</label>
+                            <select asp-for="BancoEmisor" class="form-control">
+                                <option value="NINGUNO">Seleccione</option>
+                                <option value="BBVA"> BBVA BANCOMER</option>
+                                <option value="SANTANDER"> SANTANDER</option>
+                                <option value="AZTECA">BANCO AZTECA</option>
+                                <option value="CITIBANAMEX">CITIBANAMEX</option>
+                            </select>
+                            <span asp-validation-for="BancoEmisor" class="text-danger"></span>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot class="text-center">
+                <tr>
+                </tr>
+            </tfoot>
+        </table>
+        <div class="form-group">
+            <input type="submit" value="Guardar Pago" class="btn btn-outline-success" asp-action="Create" style="font-family:'Comic Sans MS'" />
+        </div>
+        <script type="text/javascript">
+            function CalculaCampos() {
+                try {
+                    console.log("calcula campos...");
+                    var subt = document.getElementById("txtSubtotal").value;
+                    var TipoMoneda = document.getElementById("DDLTP").value;
+                    console.log("Tipo de moneda: ", TipoMoneda);
+                    if (TipoMoneda == "DOLAR" || TipoMoneda == "DLS") {
+                        document.getElementById("txtiva").value = 0;
+                        document.getElementById("txtretencion").value = 0;
+                        document.getElementById("txtotal").value = subt;
+                    } else if ((TipoMoneda == "PESO" || TipoMoneda == "MXN") && subt != "") {
+                        document.getElementById("txtiva").value = parseFloat(subt * 0.04);
+                        document.getElementById("txtretencion").value = parseFloat(subt * 0.16);
+                        var iva = parseFloat(document.getElementById("txtiva").value);
+                        var retencion = parseFloat(document.getElementById("txtretencion").value);
+                        var TipoMoneda = document.getElementById("DDLTP").value;
+                        document.getElementById("txtotal").value = parseFloat(parseFloat(subt) + parseFloat(iva) + parseFloat(retencion));
+                    }
+                    else {
+                        document.getElementById("txtiva").value = parseFloat(subt * 0.04);
+                        document.getElementById("txtretencion").value = parseFloat(subt * 0.16);
+                        var iva = parseFloat(document.getElementById("txtiva").value);
+                        var retencion = parseFloat(document.getElementById("txtretencion").value);
+                        var TipoMoneda = document.getElementById("DDLTP").value;
+                        document.getElementById("txtotal").value = parseFloat(parseFloat(subt) + parseFloat(iva) + parseFloat(retencion));
+                    }
+                } catch (err) {
+                    console.log("error: ", err);
+                }
+            }
+            function OcultaCampos() {
+                try {
+                    console.log("Ocultando campos...");
+                    var subt = document.getElementById("txtSubtotal").value;
+                    var TipoMoneda = document.getElementById("DDLTP").value;
+                    var lblSubt, iva, retencion, total;
+                    if (TipoMoneda == "DOLAR" || TipoMoneda == "DLS") {
+                        //document.getElementById("").value
+                        document.getElementById("txtiva").style.visibility = "hidden";
+                        document.getElementById("txtretencion").style.visibility = "hidden";
+                        document.getElementById("lbliva").style.visibility = "hidden";
+                        document.getElementById("lblretencion").style.visibility = "hidden";
+                        document.getElementById("txtiva").value = 0
+                        document.getElementById("txtretencion").value = 0
+                        document.getElementById("txtotal").value = document.getElementById("txtSubtotal").value
+                    } else if ((TipoMoneda == "PESO" || TipoMoneda == "MXN") && subt != "") {
+                        //PONE LOS CAMPOS VISIBLES
+                        document.getElementById("txtiva").style.visibility = "visible";
+                        document.getElementById("txtretencion").style.visibility = "visible";
+                        document.getElementById("lbliva").style.visibility = "visible";
+                        document.getElementById("lblretencion").style.visibility = "visible";
+                        //VUELVE A CALCULAR LOS PROSENTAJES
+                        var subt = document.getElementById("txtSubtotal").value;
+                        document.getElementById("txtiva").value = parseFloat(subt * 0.04);
+                        document.getElementById("txtretencion").value = parseFloat(subt * 0.16);
+                        var iva = parseFloat(document.getElementById("txtiva").value);
+                        var retencion = parseFloat(document.getElementById("txtretencion").value);
+                        document.getElementById("txtotal").value = parseFloat(parseFloat(subt) + parseFloat(iva) + parseFloat(retencion));
+                    }
+                } catch (err) {
+                    console.log("error ocultacampos()", err);
+                }
+            }
+        </script>
+    </form>
+</div>
+@if (ViewBag.Action != "Correcto" & ViewBag.Action != null)
+{
+    <script>
+            swal("Error!", "@TempData["ErrorCobroCliente"].ToString()", "error");
+    </script>
+    TempData["ErrorCobroCliente"] = null;
+}
+@if (ViewBag.Action == "Correcto")
+{
+    <script>
+        swal("Correcto!", "Proceso terminado con exito", "success");
+        //window.location.href = "../Clientes.cshtml";
+        setTimeout(function () { window.location.href = "../CobroClientes/Menu"; }, 2500);
+    </script>
+
+    ViewBag.Action = null;
+}
+<div>
+    <a asp-action="Index" class="btn btn-outline-primary">Regresar al menu</a>
+</div>
+

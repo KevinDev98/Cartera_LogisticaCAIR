@@ -1,0 +1,148 @@
+﻿
+@{
+    ViewData["Title"] = "Información de facturas de clientes";
+}
+@*@model List<LogisticaCAIR.Models.ViInfoCobroCliente>*@
+@model List<LogisticaCAIR.Models.ViInfoFacturaCliente>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<script type="text/javascript" src="~/js/jquery-3.6.0.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script>
+<link type="text/css" href="~/css/StyleSheetTables.css" rel="stylesheet" />
+<div class="container" style="width:100%">
+    <h2 class="text-center modal-title" style="margin:2%">RESUMEN DE FACTURAS DE CLIENTES</h2>
+    <form class="embed-responsive" style="width:100%">
+        <div class="form-group text-center" style="margin: 2%, 2%;">
+            <input type="submit" value="Generar Excel" class="btn btn-outline-info" asp-action="ExportarExcel" style="font-family:'Comic Sans MS'" />
+        </div>
+        <div class="form-group text-center">
+            <div class="row" style="margin-top:2%;">
+                <div class="col-4">
+                    <input asp-action="Index" type="date" name="DateInit" value="@ViewData["ParamFechaInicio"]" width="50%" /> Fecha inicial
+                </div>
+                <div class="col-4">
+                    <input asp-action="Index" type="date" name="DateEnd" value="@ViewData["ParamFechaVencimiento"]" width="50%" /> Fecha final
+                </div>
+                <div class="col-4">
+                    <input asp-action="Index" type="search" name="Name" value="@ViewData["Name"]" width="50%" /> Cliente
+                </div>
+            </div>
+            <div class="row Centro" style="margin-top:2%;">
+                <input type="submit" value="Buscar" class="btn btn-outline-dark text-black" asp-action="Index" style="font-family:'Comic Sans MS'" />
+            </div>
+        </div>
+        @*<table id="tableStyle" class="table table-bordered embed-responsive table-striped" style="width:100%">*@
+        <table class="table table-bordered text-center">
+            <thead>
+                <tr style="width:100%">
+                    <th class="active bg-danger text-center text-white" style="font-family:'Comic Sans MS'; align-content:center;">ACTUALIZAR ESTATUS</th>
+                    <th class="active bg-danger text-center text-white" style="font-family: 'Comic Sans MS'; align-content: center;">NÚMERO DE FACTURA CAIR</th>
+                    <th class="active bg-danger text-center text-white" style="font-family: 'Comic Sans MS'; align-content: center;">CLIENTE</th>
+                    <th class="active bg-danger text-center text-white" style="font-family: 'Comic Sans MS'; align-content: center;">TIPO DE MONEDA</th>
+                    <th class="active bg-danger text-center text-white" style="font-family: 'Comic Sans MS'; align-content: center;">SUBTOTAL</th>
+                    <th class="active bg-danger text-center text-white" style="font-family: 'Comic Sans MS'; align-content: center;">IVA</th>
+                    <th class="active bg-danger text-center text-white" style="font-family: 'Comic Sans MS'; align-content: center;">RETENCIÓN</th>
+                    <th class="active bg-danger text-center text-white" style="font-family: 'Comic Sans MS'; align-content: center;">TOTAL</th>
+                    <th class="active bg-danger text-center text-white" style="font-family: 'Comic Sans MS'; align-content: center;">FECHA DE PAGO</th>
+                    <th class="active bg-danger text-center text-white" style="font-family: 'Comic Sans MS'; align-content: center;">FECHA DE VENCIMIENTO</th>
+                    <th class="active bg-danger text-center text-white" style="font-family: 'Comic Sans MS'; align-content: center;">ESTATUS</th>
+                    <th class="active bg-danger text-center text-white" style="font-family:'Comic Sans MS'; align-content:center;">ELIMINAR FACTURA</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td class="btn btn-outline-warning text-center text-white">
+                        @*@Html.ActionLink("Actualizar estatus", "Detalle", new { DocNum = item.NumDoc })*@
+                        <a href="@Url.Action("Detalle","CobroClientes", new { DocNum = item.NumDoc })">
+                            <span class="material-symbols-outlined">
+                                drive_file_move
+                            </span>
+                        </a>
+                    </td>
+                    <td style="align-content: center; justify-content: center;" class="text-center">
+                        @Html.DisplayFor(modelItem => item.NumDoc)
+                    </td>
+                    <td style="align-content: center; justify-content: center;" class="text-center">
+                        @Html.DisplayFor(modelItem => item.Clentes)
+                    </td>
+                    <td style="align-content: center; justify-content: center;" class="text-center">
+                        @Html.DisplayFor(modelItem => item.TipoMoneda)
+                    </td>
+                    <td style="align-content: center; justify-content: center;" class="text-center">
+                        @Html.DisplayFor(modelItem => item.SubTotal)
+                    </td>
+                    <td style="align-content: center; justify-content: center; " class="text-center">
+                        @Html.DisplayFor(modelItem => item.Iva)
+                    </td>
+                    <td style="align-content: center; justify-content: center;" class="text-center">
+                        @Html.DisplayFor(modelItem => item.Retencion)
+                    </td>
+                    <td style="align-content: center; justify-content: center;" class="text-center">
+                        @Html.DisplayFor(modelItem => item.MontoTotal)
+                    </td>
+                    <td style="align-content: center; align-items: center; justify-content: center;" class="text-center">
+                        @Html.DisplayFor(modelItem => item.FechaPago)
+                    </td>
+                    <td style="align-content: center; align-items: center; justify-content: center;" class="text-center">
+                        @Html.DisplayFor(modelItem => item.FechaFinal)
+                    </td>
+                    <td style="align-content: center; align-items: center; justify-content: center;" class="text-center">
+                        @Html.DisplayFor(modelItem => item.Estatus)
+                    </td>
+                    <td class="btn btn-outline-warning text-center text-white">
+                        @*@Html.ActionLink("Eliminar factura", "Borrar", new { DocNum = item.NumDoc })*@
+                        <a href="@Url.Action("Borrar","CobroClientes", new { DocNum = item.NumDoc })">
+                            <span class="material-symbols-outlined">
+                                delete_forever
+                            </span>
+                        </a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+        @if (ViewBag.Action != "Correcto" & ViewBag.Action != null)
+        {
+            @if (ViewBag.Action == "Update Correcto")
+            {
+                <script>
+                    swal("Correcto!", "Proceso terminado con exito", "success");
+                </script>
+            }
+            else
+            {
+                <script>
+
+                    swal("Error!", "@TempData["ErrorCobroCliente"].ToString()", "error");
+                </script>
+            }
+
+            TempData["ErrorCobroCliente"] = null;
+        }
+        @if (ViewBag.Action == "Correcto")
+        {
+            <script>
+                swal("Correcto!", "Proceso terminado con exito", "success");
+                //window.location.href = "../Clientes.cshtml";
+                //window.location.reload();
+                setTimeout(function () { window.location.href = "../CobroClientes/Menu"; }, 2500);
+            </script>
+
+            ViewBag.Action = null;
+        }
+        @if (ViewBag.Action == "Update Correcto")
+        {
+            <script>
+                swal("Correcto!", "Proceso terminado con exito", "success");
+            </script>
+
+            ViewBag.Action = null;
+        }
+    </form>
+</div>
+<div>
+    <a href="../CobroClientes/Menu" class="btn btn-outline-primary">Regresar al menu</a>
+</div>
+

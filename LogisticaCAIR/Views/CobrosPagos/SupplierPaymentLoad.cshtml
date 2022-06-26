@@ -1,0 +1,140 @@
+﻿@{
+    ViewData["Title"] = "Carga de pagos";
+}
+@*@model LogisticaCAIR.Models.VistasSqlModels*@
+@model LogisticaCAIR.Models.PaymentLoadModel
+<style type="text/css">
+    .upload {
+        justify-content: center;
+        justify-items: center;
+        align-content: center;
+        align-items: center;
+        margin-top: 15%;
+        margin-left: 20%;
+    }
+
+    .centro {
+        justify-content: center;
+        justify-items: center;
+        align-content: center;
+        align-items: center;
+    }
+</style>
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<link href="~/css/StyleSheetTables.css" rel="stylesheet" />
+<div class="row centro">
+    <label class="centro"><strong>CARGA DE PAGOS DE PROVEEDORES</strong></label>
+</div>
+<table style="width:100%;">
+    <thead>
+        <tr>
+            <th class="active bg-danger text-center text-white" style="font-family: 'Comic Sans MS'; align-content: center; width: 100%;">FECHA DE INICIO</th>
+            <th class="active bg-danger text-center text-white" style="font-family: 'Comic Sans MS'; align-content: center; width: 100%;">FECHA DE VENCIMIENTO</th>
+            <th class="active bg-danger text-center text-white" style="font-family: 'Comic Sans MS'; align-content: center; width: 100%;">NÚMERO DE CAJA</th>
+            <th class="active bg-danger text-center text-white" style="font-family: 'Comic Sans MS'; align-content: center; width: 100%;">NÚMERO DE PEDIMENTO</th>
+            <th class="active bg-danger text-center text-white" style="font-family: 'Comic Sans MS'; align-content: center; width: 100%;">NÚMERO DE FACTURA DE PROVEEDOR</th>
+            <th class="active bg-danger text-center text-white" style="font-family: 'Comic Sans MS'; align-content: center; width: 100%;">NÚMERO DE FACTURA CAIR</th>
+            <th class="active bg-danger text-center text-white" style="font-family: 'Comic Sans MS'; align-content: center; width: 100%;">PROVEEDOR</th>
+            <th class="active bg-danger text-center text-white" style="font-family: 'Comic Sans MS'; align-content: center; width: 100%;">TIPO DE MONEDA</th>
+            <th class="active bg-danger text-center text-white" style="font-family: 'Comic Sans MS'; align-content: center; width: 100%;">SUBTOTAL</th>
+            <th class="active bg-danger text-center text-white" style="font-family: 'Comic Sans MS'; align-content: center; width: 100%;">IVA</th>
+            <th class="active bg-danger text-center text-white" style="font-family: 'Comic Sans MS'; align-content: center; width: 100%;">CARGOS EXTRA</th>
+            <th class="active bg-danger text-center text-white" style="font-family: 'Comic Sans MS'; align-content: center; width: 100%;">RETENCIÓN</th>
+            <th class="active bg-danger text-center text-white" style="font-family: 'Comic Sans MS'; align-content: center; width: 100%;">TOTAL</th>
+            <th class="active bg-danger text-center text-white" style="font-family: 'Comic Sans MS'; align-content: center; width: 100%;">REFERENCIA</th>
+            <th class="active bg-danger text-center text-white" style="font-family: 'Comic Sans MS'; align-content: center; width: 100%;">FORMA DE PAGO</th>
+            <th class="active bg-danger text-center text-white" style="font-family: 'Comic Sans MS'; align-content: center; width: 100%;">PAGADO</th>
+            <th class="active bg-danger text-center text-white" style="font-family: 'Comic Sans MS'; align-content: center; width: 100%;">FECHA DE PAGO</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="align-content: center; justify-content: center; font-family: 'Comic Sans MS';" class="text-center">
+                formato dd//MM/yyyy
+            </td>
+            <td style="align-content: center; justify-content: center; font-family: 'Comic Sans MS';" class="text-center">
+                formato dd//MM/yyyy
+            </td>
+            <td style="align-content: center; justify-content: center; font-family: 'Comic Sans MS';" class="text-center">
+                Campo númerico(Validar que no se repita con un número existente)
+            </td>
+            <td style="align-content: center; justify-content: center; font-family: 'Comic Sans MS';" class="text-center">
+                Campo númerico(Validar que no se repita con un número existente)
+            </td>
+            <td style="align-content: center; justify-content: center; font-family: 'Comic Sans MS';" class="text-center">
+                Campo númerico(Validar que no se repita con un número de factura existente)
+            </td>
+            <td style="align-content: center; justify-content: center; font-family: 'Comic Sans MS';" class="text-center">
+                Campo númerico(Validar que no se repita con un número de factura existente)
+            </td>
+            <td style="align-content: center; justify-content: center; font-family: 'Comic Sans MS';" class="text-center">
+                Campo alfanúmerico
+            </td>
+            <td style="align-content: center; justify-content: center; font-family: 'Comic Sans MS';" class="text-center">
+                DLS O MXN
+            </td>
+            <td style="align-content: center; justify-content: center; font-family: 'Comic Sans MS';" class="text-center">
+                Campo númerico, puede llevar decimales
+            </td>
+            <td style="align-content: center; justify-content: center; font-family: 'Comic Sans MS';" class="text-center">
+                Campo númerico, puede llevar decimales
+            </td>
+            <td style="align-content: center; justify-content: center; font-family: 'Comic Sans MS';" class="text-center">
+                Campo númerico, puede llevar decimales
+            </td>
+            <td style="align-content: center; justify-content: center; font-family: 'Comic Sans MS';" class="text-center">
+                Campo númerico, puede llevar decimales
+            </td>
+            <td style="align-content: center; justify-content: center; font-family: 'Comic Sans MS';" class="text-center">
+                Campo númerico, puede llevar decimales
+            </td>
+            <td style="align-content: center; justify-content: center; font-family: 'Comic Sans MS';" class="text-center">
+                Campo númerico
+            </td>
+            <td style="align-content: center; justify-content: center; font-family: 'Comic Sans MS';" class="text-center">
+                Campo alfanúmerico
+            </td>
+            <td style="align-content: center; justify-content: center; font-family: 'Comic Sans MS';" class="text-center">
+                SI/NO
+            </td>
+            <td style="align-content: center; justify-content: center; font-family: 'Comic Sans MS';" class="text-center">
+                formato dd//MM/yyyy
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div class="row upload">
+    <form enctype="multipart/form-data" method="post">
+        <input type="file" multiple="multiple" id="Files" name="Files" class="upload" />
+        <input type="submit" name="Files" asp-controller="PagoProveedores" asp-action="PaymentLoad"
+               class="btn-outline-info" style="width:25%;" value="Cargar pagos" />
+        @if (ViewBag.Action != "Correcto" & ViewBag.Action != null)
+        {
+            <script>
+                console.log("Listo calixto error");
+            swal("Error!", "@TempData["ErrorCobroCliente"].ToString()", "error");
+            </script>
+            TempData["ErrorCobroCliente"] = null;
+        }
+        @if (ViewBag.Action == "Correcto")
+        {
+            <script>
+                console.log("Listo calixto");
+                swal("Correcto!", "Proceso terminado con exito", "success");
+                //window.location.href = "../Clientes.cshtml";
+                //window.location.reload();
+                //setTimeout(function () { window.location.href = "../CobrosPagos/PaymentLoad"; }, 2500);
+            </script>
+
+            ViewBag.Action = null;
+        }
+    </form>
+    @*<form enctype="multipart/form-data" method="post" asp-action="PaymentLoad">
+            <input type="file" name="excelfile" class="upload" />
+            <input type="submit" value="Importar" class="upload btn-outline-info" />
+        </form>*@
+
+    @*<table id="exceltable"></table>*@
+</div>

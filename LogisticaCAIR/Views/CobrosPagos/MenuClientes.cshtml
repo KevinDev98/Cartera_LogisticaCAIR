@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewData["Title"] = "Menu de Clientes";
+}
+
+@*<h1>MenuClientes</h1>*@
+<div class="container-fluid">
+    <div class="row" style="margin:auto; justify-content:center; align-items:center; position:center; margin-top:15%">
+        <div class="col-lg-4 col-sm-12">
+            @*<input type="submit" icon="" class="img-fluid" onclick="Crear()" />*@
+            @*<a src="../Home/Index" icon="~/img/CobroClie.png"></a>*@
+            <img src="~/img/CobroClie.png" width="90%" height="90%" />
+            <br />
+            <label>
+                @Html.ActionLink("Crear nuevo pago de cliente", "Create", "CobroClientes")
+            </label>
+        </div>
+        <div class="col-lg-4 col-sm-12">
+            @*<input type="submit" icon="" class="img-fluid" onclick="Buscar()" />*@
+            @*<a src="../Home/Index" icon="~/img/Buscar.png"></a>*@
+            @*<img src="~/img/Buscar.png" width="70%" height="70%" />*@
+            <img src="~/img/Estatus.png" width="70%" height="70%" />
+            <br />
+            <label>
+                @Html.ActionLink("Ver detalle de los pagos de clientes", "Index", "CobroClientes")
+            </label>
+        </div>
+        <div class="col-lg-4 col-sm-12">
+            <img src="~/img/Excel.png" width="70%" height="70%" />
+            <br />
+            <label>
+                @Html.ActionLink("Carga de pagos de clientes", "Payment", "CobroClientes")
+            </label>
+        </div>
+    </div>
+        <!--<div class="row" style="margin:auto; justify-content:center; align-items:center;">
+            <div class="col-6">-->
+                @*<input type="submit" icon="" class="img-fluid" onclick="Crear()" />*@
+                @*<a src="../Home/Index" icon="~/img/CobroClie.png"></a>*@
+                <!--<img src="~/img/Estatus.png" width="45%" height="40%" />
+                <br />
+                <label>
+                    @Html.ActionLink("Actualiza Estatus", "Create", "CobroClientes")
+                </label>
+            </div>
+            <div class="col-6">-->
+                @*<input type="submit" icon="" class="img-fluid" onclick="Buscar()" />*@
+                @*<a src="../Home/Index" icon="~/img/Buscar.png"></a>*@
+                <!--<img src="~/img/Excel.png" width="50%" height="50%" />
+                <br />
+                <label>
+                    @Html.ActionLink("Reportes", "Index", "CobroClientes")
+                </label>
+            </div>
+        </div>-->           
+        <script type="text/javascript">
+            function Crear() {
+                window.location.href = "../CrearPago";
+            }
+        </script>
+    </div>

@@ -1,0 +1,146 @@
+﻿@{
+    ViewData["Title"] = "Vizualizar pago";
+}
+@*@model LogisticaCAIR.Models.VistasSqlModels*@
+@model LogisticaCAIR.Models.ViInfoFacturaCliente
+<h1>Detalle de factura de cliente</h1>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<div class="table table-borderless table-responsive bg-light">
+    <form class="active container-fluid table" asp-action="Detalle">
+        <div class="form-group text-center">
+            <input type="submit" value="Generar PDF" class="btn btn-outline-info" asp-action="ExportarPDF" style="font-family:'Comic Sans MS'" onclick="MsjReport" />
+        </div>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <table class="table-responsive">
+            <tbody style="justify-content:center; justify-items:center; align-items:center; align-content:center;">
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <label class="control-label" style="font-family:'Comic Sans MS'"> Fecha de pago</label>
+                            <input asp-for="FechaPago" class="form-control focus" readonly="readonly" type="text" />
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <label class="control-label bg-light" style="font-family:'Comic Sans MS'">Número de factura</label>
+                            <br />
+                            <input asp-for="NumDoc" class="form-control focus" name="NumDoc" readonly="readonly" />
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <label class="control-label" style="font-family:'Comic Sans MS'">Cliente</label>
+                            <input asp-for="Clentes" class="form-control focus" name="Clentes" readonly="readonly" type="text" />
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <label class="control-label" style="font-family:'Comic Sans MS'">Divisa</label>
+                            <input asp-for="TipoMoneda" class="form-control focus" readonly="readonly" type="text" />
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <label class="control-label" style="font-family:'Comic Sans MS'"> Monto de pago</label>
+                            <input asp-for="SubTotal" class="form-control focus" readonly="readonly" />
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <label class="control-label" style="font-family:'Comic Sans MS'"> IVA</label>
+                            <input asp-for="Iva" class="form-control focus" readonly="readonly" />
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <label class="control-label" style="font-family:'Comic Sans MS'"> Retención</label>
+                            <input asp-for="Retencion" class="form-control focus" readonly="readonly" />
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <label class="control-label" style="font-family:'Comic Sans MS'"> Monto total de pago</label>
+                            <input asp-for="MontoTotal" class="form-control focus" name="MontoTotal" readonly="readonly" />
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-group row" style="justify-content:center; justify-items:center; align-items:center; align-content:center">
+                            <label class="control-label" style="font-family:'Comic Sans MS'"> Estatus</label>
+                            <select style="width:80%; justify-content:center; justify-items:center; align-items:center;  align-content:center;" name="Estatus"
+                                    asp-for="Estatus" id="EstatusPago" onchange="EstatusPagado()" class="form-control">
+                                <option value="SI">PAGADO</option>
+                                <option value="C">CANCELADO</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="row" style="justify-content:center; justify-items:center; align-items:center; align-content:center">
+                            <label class="control-label" style="font-family:'Comic Sans MS';">Fecha de pago</label>
+                        </div>
+                        <div class="row" style="justify-content:center; justify-items:center; align-items:center; align-content:center">
+                            <input style="width:80%; justify-content:center; justify-items:center; align-items:center; align-content:center;" class="form-control"
+                                   asp-format="{0:dd/MM/yyyy}" type="date" asp-for="FechaPago" id="DtePago" name="DtePago" />
+                            <span asp-validation-for="FechaPago" class="text-danger"></span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="justify-content:center; justify-items:center; align-items:center; align-content:center;">
+                        <div class="form-group row" style="justify-content:center; justify-items:center; align-items:center; align-content:center;">
+                            <input type="submit" value="Actualizar estatus" class="btn btn-primary" asp-action="UpdateEstatus" />
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot class="text-center">
+                <tr>
+                </tr>
+            </tfoot>
+        </table>
+        <script type="text/javascript">
+            function LlenaCampos() {
+                try {
+                    console.log("llandando campos...");
+                    var subt = document.getElementById("txtSubtotal").value;
+                    document.getElementById("txtiva").value = parseFloat(subt * 0.04);
+                    document.getElementById("txtretencion").value = parseFloat(subt * 0.16);
+                    var iva = parseFloat(document.getElementById("txtiva").value);
+                    var retencion = parseFloat(document.getElementById("txtretencion").value);
+                    document.getElementById("txtotal").value = parseFloat(parseFloat(subt) + parseFloat(iva) + parseFloat(retencion));
+                } catch (err) {
+                    console.log("error: ", err);
+                }
+            }
+            function MsjReport() {
+                swal("Correcto!", "Proceso terminado", "success");
+            }
+        </script>
+        @if (ViewBag.Action != "Correcto" & ViewBag.Action != null)
+        {
+            <script>
+            swal("Error!", "@TempData["ErrorCobroCliente"].ToString()", "error");
+            </script>
+            TempData["ErrorCobroCliente"] = null;
+        }
+        @if (ViewBag.Action == "Correcto")
+        {
+            <script>
+                swal("Correcto!", "Proceso terminado con exito", "success");
+                //window.location.href = "../Clientes.cshtml";
+                //window.location.reload();
+                /*setTimeout(function () { window.location.href = "../CobroClientes/Menu"; }, 2500);*/
+            </script>
+
+            ViewBag.Action = null;
+        }
+    </form>
+</div>
+<div>
+    <a asp-action="Index" class="btn btn-outline-info">Regresar al menu</a>
+</div>

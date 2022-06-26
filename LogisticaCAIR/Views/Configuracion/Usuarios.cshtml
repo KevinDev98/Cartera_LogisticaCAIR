@@ -1,0 +1,114 @@
+﻿
+@{
+    ViewData["Title"] = "Usuarios";
+}
+@model List<LogisticaCAIR.Models.Usuario>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link type="text/css" href="~/css/StyleSheetTables.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<div class="container-fluid">
+    <div class="table table-responsive">
+        <h2 class="card-title text-center"> CONFIGURACIÓN DE USUARIOS</h2>
+        <form>
+            <div class="text-center" style="margin-bottom:2%">
+                <input type="submit" value="Registrar usuario" class="btn btn-success" asp-controller="Usuarios" asp-action="Create" />
+            </div>
+            <table class="table table-bordered text-center">
+                <thead>
+                    <tr>
+                        <th class="active bg-danger text-center text-white">NOMBRE</th>
+                        <th class="active bg-danger text-center text-white">USUARIO</th>
+                        <th class="active bg-danger text-center text-white">CORREO</th>
+                        <th class="active bg-danger text-center text-white">PERFIL</th>
+                        <th class="active bg-danger text-center text-white">EDITAR / ELIMINAR</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NombreEmpleado)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Username)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Useremail)
+                            </td>
+                            <td>
+                                @if (item.Perfil == 1)
+                                {
+                                    <p>Directora</p>
+                                }
+                                else if (item.Perfil == 2)
+                                {
+                                    <p>Gerente admistrativo</p>
+                                }
+                                else if (item.Perfil == 3)
+                                {
+                                    <p>Gerente de finanzas</p>
+                                }
+                                else if (item.Perfil == 4)
+                                {
+                                    <p>Auxiliar de control</p>
+                                }
+                                else if (item.Perfil == 5)
+                                {
+                                    <p>Supervisor de control de trafico</p>
+                                }
+
+                            </td>
+                            <td>
+                                @*@Html.ActionLink("Insert","Insert", new )*@
+                                <a href="@Url.Action("Edit","Usuarios", new { id = item.IdUsuario })">
+                                    <span class="material-symbols-outlined">
+                                        drive_file_rename_outline
+                                    </span>
+                                </a>
+                                <hr />
+                                <a href="@Url.Action("Delete","Usuarios", new { id = item.IdUsuario })">
+                                    <span class="material-symbols-outlined">
+                                        delete_forever
+                                    </span>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </form>
+    </div>
+    @if (ViewBag.ErrorConfigUser != null)
+    {
+        @*<div class="alert-danger">
+                @TempData["Error"]
+            </div>*@
+        <script>
+            console.log("Entra a script");
+            try {
+                swal("Error!", "Error al intentar crear/editar un usuario. Campos obligatorios; usuario, nombre, contrase\361a y puesto", "error");
+                TempData["Error"] = null;
+            } catch (err) {
+                console.log(err);
+            }
+        </script>
+        ViewBag.ErrorConfigUser = null;
+    }
+    @if(ViewBag.Correcto == "No error")
+    {
+        <script>
+            console.log("Entra a script");
+            try {
+                swal("Correcto!", "Proceso terminado con exito", "success");
+                TempData["Error"] = null;
+            } catch (err) {
+                console.log(err);
+            }
+        </script>
+        ViewBag.Correcto = null;
+    }
+
+</div>
+

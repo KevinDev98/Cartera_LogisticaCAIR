@@ -1,0 +1,38 @@
+﻿
+table {
+    table-layout: fixed;
+    width: 250px;
+    overflow-x: scroll;
+    overflow-y: scroll;
+    display: block;
+    max-height: 700px;
+}
+
+th, td {
+    border: 1px solid blue;
+    width: 100%;
+    word-wrap: break-word;
+}
+
+.Centro {
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    align-content: center;
+}
+
+/* tbody {
+        max-height:500px;
+    }*/
+
+.table-wrapper {
+    overflow-x: scroll;
+    overflow-y: scroll;
+}
+
+
+    .table-wrapper table thead th,
+    .table-wrapper table tbody td {
+        border: 1px solid #000;
+        background-color: #FFF;
+    }

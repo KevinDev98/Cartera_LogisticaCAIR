@@ -1,0 +1,372 @@
+﻿@model LogisticaCAIR.Models.FacturasCliente
+
+@{
+    ViewData["Title"] = "Factura de clientes";
+}
+
+<h1>Factura de clientes</h1>
+<hr />
+@*<div class="row">
+        <div class="col-md-4">
+            <form asp-action="Factura_Clientes">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="FcFechaInicio" class="control-label"></label>
+                    <input asp-for="FcFechaInicio" class="form-control" />
+                    <span asp-validation-for="FcFechaInicio" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FcFechaVencimiento" class="control-label"></label>
+                    <input asp-for="FcFechaVencimiento" class="form-control" />
+                    <span asp-validation-for="FcFechaVencimiento" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FcNumFactCair" class="control-label"></label>
+                    <input asp-for="FcNumFactCair" class="form-control" />
+                    <span asp-validation-for="FcNumFactCair" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FcIdclie" class="control-label"></label>
+                    <select asp-for="FcIdclie" class="form-control" asp-items="ViewBag.FcIdclie"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FcUsrVerificador" class="control-label"></label>
+                    <input asp-for="FcUsrVerificador" class="form-control" />
+                    <span asp-validation-for="FcUsrVerificador" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FcTipoMoneda" class="control-label"></label>
+                    <input asp-for="FcTipoMoneda" class="form-control" />
+                    <span asp-validation-for="FcTipoMoneda" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FcSubtotal" class="control-label"></label>
+                    <input asp-for="FcSubtotal" class="form-control" />
+                    <span asp-validation-for="FcSubtotal" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FcIva" class="control-label"></label>
+                    <input asp-for="FcIva" class="form-control" />
+                    <span asp-validation-for="FcIva" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FcCargoExtra" class="control-label"></label>
+                    <input asp-for="FcCargoExtra" class="form-control" />
+                    <span asp-validation-for="FcCargoExtra" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FcRetencion" class="control-label"></label>
+                    <input asp-for="FcRetencion" class="form-control" />
+                    <span asp-validation-for="FcRetencion" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FcCostoTotal" class="control-label"></label>
+                    <input asp-for="FcCostoTotal" class="form-control" />
+                    <span asp-validation-for="FcCostoTotal" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FcNumeroComplemento" class="control-label"></label>
+                    <input asp-for="FcNumeroComplemento" class="form-control" />
+                    <span asp-validation-for="FcNumeroComplemento" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FcComentario" class="control-label"></label>
+                    <input asp-for="FcComentario" class="form-control" />
+                    <span asp-validation-for="FcComentario" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FcFormaPago" class="control-label"></label>
+                    <input asp-for="FcFormaPago" class="form-control" />
+                    <span asp-validation-for="FcFormaPago" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FcEstatus" class="control-label"></label>
+                    <input asp-for="FcEstatus" class="form-control" />
+                    <span asp-validation-for="FcEstatus" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FcFechaPago" class="control-label"></label>
+                    <input asp-for="FcFechaPago" class="form-control" />
+                    <span asp-validation-for="FcFechaPago" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>*@
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<div class="container table table-borderless table-responsive" style="justify-content:center; justify-items:center; align-items:center; align-content:center">
+    <form class="active container-fluid table table-bordered" asp-action="CobroClientes">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row" style="justify-content:center; justify-items:center; align-items:center; align-content:center">
+            <div class="col-lg-3 col-md-4 col-sm-6 form-group">
+                <div class="row" style="justify-content:center; justify-items:center; align-items:center; align-content:center">
+                    <label asp-for="FcFechaInicio" class="control-label" style="font-family:'Comic Sans MS';">Fecha de inicio</label>
+                </div>
+                <div class="row" style="justify-content:center; justify-items:center; align-items:center; align-content:center">
+                    <input style="width:80%; justify-content:center; justify-items:center; align-items:center; align-content:center;" class="form-control"
+                           asp-format="{0:dd/MM/yyyy}" type="date" asp-for="FcFechaInicio" />
+                    <span asp-validation-for="FcFechaInicio" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 form-group">
+                <div class="row" style="justify-content:center; justify-items:center; align-items:center; align-content:center">
+                    <label asp-for="FcFechaVencimiento" class="control-label" style="font-family:'Comic Sans MS';"> Fecha de vencimiento</label>
+                </div>
+                <div class="row" style="justify-content:center; justify-items:center; align-items:center; align-content:center">
+                    <input style="width:80%; justify-content:center; justify-items:center; align-items:center; align-content:center;"
+                           asp-for="FcFechaVencimiento" class="form-control" asp-format="{0:dd/MM/yyyy}" type="date" />
+                    <span asp-validation-for="FcFechaVencimiento" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 form-group">
+                <div class="row" style="justify-content:center; justify-items:center; align-items:center; align-content:center">
+                    <label asp-for="FcNumFactCair" class="control-label" style="font-family:'Comic Sans MS';">Número de factura</label>
+                </div>
+                <div class="row" style="justify-content:center; justify-items:center; align-items:center; align-content:center">
+                    <input style="width:80%; justify-content:center; justify-items:center; align-items:center; align-content:center;" asp-for="FcNumFactCair" class="form-control" />
+                    <span asp-validation-for="FcNumFactCair" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 form-group">
+                <div class="row" style="justify-content:center; justify-items:center; align-items:center; align-content:center">
+                    <label asp-for="FcIdclie" class="control-label" style="font-family:'Comic Sans MS';">Nombre de cliente</label>
+                </div>
+                <div class="row" style="justify-content:center; justify-items:center; align-items:center; align-content:center">
+                    <select style="width:80%; justify-content:center; justify-items:center; align-items:center; align-content:center;" asp-for="FcIdclie" class="form-control" asp-items="ViewBag.FcIdclie"></select>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="justify-content:center; justify-items:center; align-items:center; align-content:center">
+            <div class="col-lg-3 col-md-4 col-sm-6 form-group">
+                <div class="row" style="justify-content:center; justify-items:center; align-items:center; align-content:center">
+                    <label asp-for="FcTipoMoneda" class="control-label" style="font-family:'Comic Sans MS';">Moneda</label>
+                </div>
+                <div class="row" style="justify-content:center; justify-items:center; align-items:center; align-content:center">
+                    @*<input style="width:80%; justify-content:center; justify-items:center; align-items:center; align-content:center;" asp-for="FcTipoMoneda" class="form-control" />*@
+                    <select style="width:80%; justify-content:center; justify-items:center; align-items:center; align-content:center;"
+                            asp-for="FcTipoMoneda" class="form-control" onchange="OcultaCampos();" id="DDLTP">
+                        <option value="N/A">Seleccione</option>
+                        <option value="MXN">PESO</option>
+                        <option value="DLS">DOLAR</option>
+                    </select>
+                    <span asp-validation-for="FcTipoMoneda" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 form-group">
+                <div class="row" style="justify-content:center; justify-items:center; align-items:center; align-content:center">
+                    <label class="control-label" style="font-family:'Comic Sans MS';">Sub total</label>
+                </div>
+                <div class="row" style="justify-content:center; justify-items:center; align-items:center; align-content:center">
+                    <input style="width:80%; justify-content:center; justify-items:center; align-items:center; align-content:center;" class="form-control"
+                           id="txtSubtotal" asp-for="FcSubtotal" onchange="CalculaCampos();" />
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 form-group">
+                <div class="row" style="justify-content:center; justify-items:center; align-items:center; align-content:center">
+                    <label class="control-label" style="font-family:'Comic Sans MS';">Maniobras/Cruce/Cacetas etc.</label>
+                </div>
+                <div class="row" style="justify-content:center; justify-items:center; align-items:center; align-content:center">
+                    <input style="width:80%; justify-content:center; justify-items:center; align-items:center; align-content:center;" class="form-control"
+                           id="txtCargoExtra" asp-for="FcCargoExtra" onchange="CalculaCampos();" />
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 form-group">
+                <div class="row" style="justify-content:center; justify-items:center; align-items:center; align-content:center">
+                    <label class="control-label" style="font-family:'Comic Sans MS';" id="lbliva">IVA</label>
+                </div>
+                <div class="row" style="justify-content:center; justify-items:center; align-items:center; align-content:center">
+                    <input style="width:80%; justify-content:center; justify-items:center; align-items:center; align-content:center;" class="form-control"
+                           id="txtiva" asp-for="FcIva" readonly="readonly" />
+                </div>
+            </div>
+        </div>
+        <div class="row" style="justify-content:center; justify-items:center; align-items:center; align-content:center">
+            <div class="col-lg-3 col-md-4 col-sm-6 form-group">
+                <div class="row" style="justify-content:center; justify-items:center; align-items:center; align-content:center">
+                    <label class="control-label" style="font-family:'Comic Sans MS';" id="lblretencion">Retención</label>
+                </div>
+                <div class="row" style="justify-content:center; justify-items:center; align-items:center; align-content:center">
+                    <input style="width:80%; justify-content:center; justify-items:center; align-items:center; align-content:center;" class="form-control"
+                           id="txtretencion" asp-for="FcRetencion" readonly="readonly" />
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 form-group">
+                <div class="row" style="justify-content:center; justify-items:center; align-items:center; align-content:center">
+                    <label class="control-label" style="font-family:'Comic Sans MS';">Costo total</label>
+                </div>
+                <div class="row" style="justify-content:center; justify-items:center; align-items:center; align-content:center">
+                    <input style="width:80%; justify-content:center; justify-items:center; align-items:center; align-content:center;" class="form-control"
+                           readonly="readonly" id="txtCostoTotal" asp-for="FcCostoTotal" />
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 form-group">
+                <div class="row" style="justify-content:center; justify-items:center; align-items:center; align-content:center">
+                    <label class="control-label" style="font-family:'Comic Sans MS';">Forma de pago</label>
+                </div>
+                <div class="row" style="justify-content:center; justify-items:center; align-items:center; align-content:center">
+                    @*<input style="width:80%; justify-content:center; justify-items:center; align-items:center; align-content:center;" asp-for="FcFormaPago" class="form-control" />*@
+                    <select style="width:80%; justify-content:center; justify-items:center; align-items:center; align-content:center;" asp-for="FcFormaPago" class="form-control">
+                        <option value="N/A">Seleccione</option>
+                        <option value="PPD">PPD</option>
+                        <option value="PUE">PUE</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 form-group">
+                <div class="row" style="justify-content:center; justify-items:center; align-items:center; align-content:center">
+                    <label class="control-label" style="font-family:'Comic Sans MS';">Estatus</label>
+                </div>
+                <div class="row" style="justify-content:center; justify-items:center; align-items:center; align-content:center">
+                    @*<input style="width:80%; justify-content:center; justify-items:center; align-items:center; align-content:center;" asp-for="FcEstatus" class="form-control" />*@
+                    <select style="width:80%; justify-content:center; justify-items:center; align-items:center; align-content:center;" asp-for="FcEstatus" id="EstatusPago" onchange="EstatusPagado()" class="form-control">
+                        <option value="NO">NO PAGADO</option>
+                        <option value="SI">PAGADO</option>
+                        @*<option value="C">CANCELADO</option>*@
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="justify-content: center; justify-items: center; align-items: center; align-content: center; visibility: hidden;" id="divEstatus">
+            <div class="col-lg-3 col-md-4 col-sm-6 form-group">
+                <div class="row" style="justify-content:center; justify-items:center; align-items:center; align-content:center">
+                    <label class="control-label" style="font-family:'Comic Sans MS';">Número de complemento de pago</label>
+                </div>
+                <div class="row" style="justify-content:center; justify-items:center; align-items:center; align-content:center">
+                    <input style="width:80%; justify-content:center; justify-items:center; align-items:center; align-content:center;" class="form-control"
+                           asp-for="FcNumeroComplemento" type="number" id="NumComp" />
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 form-group">
+                <div class="row" style="justify-content:center; justify-items:center; align-items:center; align-content:center">
+                    <label class="control-label" style="font-family:'Comic Sans MS';">Fecha de pago</label>
+                </div>
+                <div class="row" style="justify-content:center; justify-items:center; align-items:center; align-content:center">
+                    <input style="width:80%; justify-content:center; justify-items:center; align-items:center; align-content:center;" class="form-control"
+                           asp-format="{0:dd/MM/yyyy}" type="date" asp-for="FcFechaPago" id="DtePago" />
+                    <span asp-validation-for="FcFechaPago" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row form-group" style="justify-content:center; justify-items:center; align-items:center; align-content:center">
+            <input type="submit" value="Guardar Pago" class="btn btn-outline-success" asp-action="Create" style="font-family:'Comic Sans MS'" />
+        </div>
+        <script type="text/javascript"> 
+            function EstatusPagado() {
+                var Estatus = document.getElementById("EstatusPago").value;
+                console.log("Estatus",Estatus);
+                if (Estatus == "NO" || Estatus=="C") {
+                    document.getElementById("divEstatus").style.visibility = "hidden";
+                } else {
+                    document.getElementById("divEstatus").style.visibility = "visible";
+                }
+                
+            }
+            function CalculaCampos() {
+                try {
+                    console.log("calcula campos...");
+                    //txtCargoExtra
+                    var CargoExt = document.getElementById("txtCargoExtra").value;
+                    console.log("cargo extra", CargoExt);
+                    if (CargoExt === null || CargoExt == "") {
+                        CargoExt = 0;
+                        console.log("cargo extra", CargoExt);
+                    }
+                    var subt = document.getElementById("txtSubtotal").value;
+                    var TipoMoneda = document.getElementById("DDLTP").value;
+                    console.log("Tipo de moneda: ", TipoMoneda);
+                    if (TipoMoneda == "DOLAR" || TipoMoneda == "DLS") {
+                        document.getElementById("txtiva").value = 0;
+                        document.getElementById("txtretencion").value = 0;
+                        document.getElementById("txtCostoTotal").value = parseFloat(parseFloat(subt) + parseFloat(CargoExt));
+                    } else if ((TipoMoneda == "PESO" || TipoMoneda == "MXN") && subt != "") {
+                        subt = parseFloat(parseFloat(subt) + parseFloat(CargoExt));
+                        document.getElementById("txtiva").value = parseFloat(subt * 0.04);
+                        document.getElementById("txtretencion").value = parseFloat(subt * 0.16);
+                        var iva = parseFloat(document.getElementById("txtiva").value);
+                        var retencion = parseFloat(document.getElementById("txtretencion").value);
+                        var TipoMoneda = document.getElementById("DDLTP").value;
+                        document.getElementById("txtCostoTotal").value = parseFloat(parseFloat(subt) + parseFloat(iva) + parseFloat(retencion));
+                    }
+                    else {
+                        subt = parseFloat(parseFloat(subt) + parseFloat(CargoExt));
+                        document.getElementById("txtiva").value = parseFloat(subt * 0.04);
+                        document.getElementById("txtretencion").value = parseFloat(subt * 0.16);
+                        var iva = parseFloat(document.getElementById("txtiva").value);
+                        var retencion = parseFloat(document.getElementById("txtretencion").value);
+                        var TipoMoneda = document.getElementById("DDLTP").value;
+                        document.getElementById("txtCostoTotal").value = parseFloat(parseFloat(subt) + parseFloat(iva) + parseFloat(retencion));
+                    }
+                } catch (err) {
+                    console.log("error: ", err);
+                }
+            }
+            function OcultaCampos() {
+                try {
+                    console.log("Ocultando campos...");
+                    var CargoExt = document.getElementById("txtCargoExtra").value;
+                    console.log("cargo extra", CargoExt);
+                    if (CargoExt === null || CargoExt == "") {
+                        CargoExt = 0;
+                        console.log("cargo extra", CargoExt);
+                    }
+                    var subt = document.getElementById("txtSubtotal").value;
+                    var TipoMoneda = document.getElementById("DDLTP").value;
+                    var lblSubt, iva, retencion, total;
+                    if (TipoMoneda == "DOLAR" || TipoMoneda == "DLS") {
+                        //document.getElementById("").value
+                        document.getElementById("txtiva").style.visibility = "hidden";
+                        document.getElementById("txtretencion").style.visibility = "hidden";
+                        document.getElementById("lbliva").style.visibility = "hidden";
+                        document.getElementById("lblretencion").style.visibility = "hidden";
+                        document.getElementById("txtiva").value = 0
+                        document.getElementById("txtretencion").value = 0
+                        document.getElementById("txtCostoTotal").value = parseFloat(parseFloat(subt) + parseFloat(CargoExt)); //document.getElementById("txtSubtotal").value
+                    } else if ((TipoMoneda == "PESO" || TipoMoneda == "MXN") && subt != "") {
+                        //PONE LOS CAMPOS VISIBLES
+                        document.getElementById("txtiva").style.visibility = "visible";
+                        document.getElementById("txtretencion").style.visibility = "visible";
+                        document.getElementById("lbliva").style.visibility = "visible";
+                        document.getElementById("lblretencion").style.visibility = "visible";
+                        //VUELVE A CALCULAR LOS PROSENTAJES
+                        var subt = document.getElementById("txtSubtotal").value;
+                        subt = parseFloat(parseFloat(subt) + parseFloat(CargoExt));
+                        document.getElementById("txtiva").value = parseFloat(subt * 0.04);
+                        document.getElementById("txtretencion").value = parseFloat(subt * 0.16);
+                        var iva = parseFloat(document.getElementById("txtiva").value);
+                        var retencion = parseFloat(document.getElementById("txtretencion").value);
+                        document.getElementById("txtCostoTotal").value = parseFloat(parseFloat(subt) + parseFloat(iva) + parseFloat(retencion));
+                    }
+                } catch (err) {
+                    console.log("error ocultacampos()", err);
+                }
+            }
+        </script>
+    </form>
+</div>
+@if (ViewBag.Action != "Correcto" & ViewBag.Action != null)
+{
+    <script>
+            swal("Error!", "@TempData["ErrorCobroCliente"].ToString()", "error");
+    </script>
+    TempData["ErrorCobroCliente"] = null;
+}
+@if (ViewBag.Action == "Correcto")
+{
+    <script>
+        swal("Correcto!", "Proceso terminado con exito", "success");
+        //window.location.href = "../Clientes.cshtml";
+        //window.location.reload();
+        setTimeout(function () { window.location.href = "../CobroClientes/Menu"; }, 2500);
+    </script>
+
+    ViewBag.Action = null;
+}
+<div>
+    <a asp-action="Index" class="btn btn-outline-primary">Ir al catálogo de facturas</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

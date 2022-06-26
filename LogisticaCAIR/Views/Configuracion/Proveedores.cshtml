@@ -1,0 +1,153 @@
+﻿
+@{
+    ViewData["Title"] = "Proveedores";
+}
+@model List<LogisticaCAIR.Models.CatProveedore>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<meta charset="utf-8" />
+<link type="text/css" href="~/css/StyleSheetTables.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<div class="container-fluid" style="width:100%;">
+    <div class="table table-responsive" style="width:100%">
+        <h2 class="card-title text-center"> CONFIGURACIÓN DE PROVEEDORES</h2>
+        <form>
+            <div class="text-center" style="margin-bottom:2%">
+                <input type="submit" value="Registrar proveedor nuevo" class="btn btn-info" asp-controller="Proveedores" asp-action="Create" />
+            </div>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        @*<th class="active bg-danger text-center text-white">ELIMINAR</th>*@
+                        <th class="active bg-danger text-center text-white">EDITAR</th>
+                        <th class="active bg-danger text-center text-white">CÓDIGO</th>
+                        <th class="active bg-danger text-center text-white">CLIENTE</th>
+                        <th class="active bg-danger text-center text-white">CONTACTO</th>
+                        <th class="active bg-danger text-center text-white">TELÉFONO 1</th>
+                        <th class="active bg-danger text-center text-white">TELÉFONO 2</th>
+                        <th class="active bg-danger text-center text-white">TELÉFONO 3</th>
+                        <th class="active bg-danger text-center text-white">TELÉFONO 4</th>
+                        <th class="active bg-danger text-center text-white">DIRECCIÓN DE EMAIL 1</th>
+                        <th class="active bg-danger text-center text-white">DIRECCIÓN DE EMAIL 2</th>
+                        <th class="active bg-danger text-center text-white">DIRECCIÓN DE EMAIL 3</th>
+                        <th class="active bg-danger text-center text-white">DIRECCIÓN DE EMAIL 4</th>
+                        <th class="active bg-danger text-center text-white">DIRECCIÓN DE PATIO 1</th>
+                        <th class="active bg-danger text-center text-white">DIRECCIÓN DE PATIO 2</th>
+                        <th class="active bg-danger text-center text-white">DIRECCIÓN DE PATIO 3</th>
+                        <th class="active bg-danger text-center text-white">NÚMERO DE CUENTA ASOCIADO</th>
+                        <th class="active bg-danger text-center text-white">BANCO DE PREFERENCIA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        @*<td>
+                                @Html.ActionLink("Eliminar", "Delete", new { id = item.CardCode })
+                            </td>*@
+                        <td>
+                            @*@Html.ActionLink("Insert","Insert", new )*@
+                            @*@Html.ActionLink("Editar", "Edit", new { id = item.CardCode })*@
+                            <a href="@Url.Action("Edit","Proveedores", new { id = item.CardCode })">
+                                <span class="material-symbols-outlined">
+                                    drive_file_rename_outline
+                                </span>
+                            </a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CardCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CardName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NameContact)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Tel)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Tel2)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Tel3)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Tel4)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email2)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email3)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email4)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DirAddressPatios)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DirAddressPatios2)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DirAddressPatios3)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NumCta)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BancoPreferencia)
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </form>
+    </div>
+    @if (TempData["ErrorConfPv"] != null)
+    {
+    <script>
+            swal("Error!", "@TempData["ErrorConfPv"].ToString()", "error");
+    </script>
+        TempData["ErrorConfPv"] = null;
+    }
+    @if (ViewBag.DatoActualizado == "Actualizado" || ViewBag.Correcto != null)
+    {
+    <script>
+        swal("Correcto!", "Proceso terminado con exito", "success");
+    </script>
+
+        ViewBag.Correcto = null;
+    }
+</div>
+@*<div class="container-fluid" style="width:100%">
+        <div class="table table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th class="active bg-danger text-center text-white">CLIENTE</th>
+                        <th class="active bg-danger text-center text-white">CONTACTO</th>
+                        <th class="active bg-danger text-center text-white">TELÉFONO 1</th>
+                        <th class="active bg-danger text-center text-white">TELÉFONO 2</th>
+                        <th class="active bg-danger text-center text-white">TELÉFONO 3</th>
+                        <th class="active bg-danger text-center text-white">TELÉFONO 4</th>
+                        <th class="active bg-danger text-center text-white">DIRECCIÓN DE EMAIL 1</th>
+                        <th class="active bg-danger text-center text-white">DIRECCIÓN DE EMAIL 2</th>
+                        <th class="active bg-danger text-center text-white">DIRECCIÓN DE EMAIL 3</th>
+                        <th class="active bg-danger text-center text-white">DIRECCIÓN DE EMAIL 4</th>
+                        <th class="active bg-danger text-center text-white">DIRECCIÓN DE PATIO 1</th>
+                        <th class="active bg-danger text-center text-white">DIRECCIÓN DE PATIO 2</th>
+                        <th class="active bg-danger text-center text-white">DIRECCIÓN DE PATIO 3</th>
+                        <th class="active bg-danger text-center text-white">NÚMERO DE CUENTA ASOCIADO</th>
+                        <th class="active bg-danger text-center text-white">BANCO DE PREFERENCIA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>*@
+

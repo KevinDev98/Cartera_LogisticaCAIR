@@ -1,0 +1,50 @@
+﻿@model LogisticaCAIR.Models.Usuario
+
+@{
+    ViewData["Title"] = "Eliminar Usuarios";
+}
+
+<h1 class="text-dark text-center">Eliminar a usuario: @Html.DisplayFor(model => model.NombreEmpleado)</h1>
+
+<h3 class="text-center">¿Estas seguro de querer eliminar este usuario?</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            Nombre
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NombreEmpleado)
+        </dd>
+        <dt class = "col-sm-2">
+            Usuario
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Username)
+        </dd>
+        <dt class = "col-sm-2">
+            Dirección de correo electrónico
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Useremail)
+        </dd>
+        @*<dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Pass)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Pass)
+        </dd>*@
+        <dt class = "col-sm-2">
+            Perfil
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PerfilNavigation.PerfilName)
+        </dd class>
+    </dl>
+    
+    <form asp-action="EliminaUsuario">
+        <input type="hidden" asp-for="IdUsuario" />
+        <input type="submit" value="Elimiar" class="btn btn-danger" asp-action="Delete" /> 
+        <a asp-action="Index" class="btn btn-light">Cancelar</a>
+    </form>
+</div>

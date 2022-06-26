@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html lang="es-mx">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - LogisticaCAIR</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="shortcut icon" href="~/img/logo_cair.JPG" />
+</head>
+<body>
+    @*<body style="background-image: url('../../wwwroot/img/logo_cair.jpg'); background-repeat: no-repeat; background-attachment: fixed; ">*@
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-danger border-bottom box-shadow mb-3">
+            <div class="container">
+                @*<a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index"><strong>Logistica CAIR</strong></a>*@
+                <a class="navbar-brand text-white" href="../Home/LoginOk"><strong>Logistica CAIR</strong></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                @if (!ViewData.Values.Contains("Login"))
+                {
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" id="MenuConf" aria-haspopup="true" aria-expanded="false">
+                                        <strong> Configuración</strong>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item text-dark" asp-area="" asp-controller="Usuarios" asp-action="Index"><strong>Usuarios</strong></a>
+                                        <a class="dropdown-item text-dark" asp-area="" asp-controller="Clientes" asp-action="Index"><strong>Clientes</strong></a>
+                                        <a class="dropdown-item text-dark" asp-area="" asp-controller="Proveedores" asp-action="Index"><strong>Proveedores</strong></a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" id="MenuCP" aria-haspopup="true" aria-expanded="false">
+                                        <strong> Cobros y pagos</strong>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        @*<a class="dropdown-item text-dark" onclick="MenuC()"><strong>Cobro a clientes</strong></a>*@
+                                        <a class="dropdown-item text-dark" asp-area="" asp-controller="CobroClientes" asp-action="Menu"><strong>Cobro a clientes</strong></a>
+                                        <a class="dropdown-item text-dark" asp-area="" asp-controller="PagoProveedores" asp-action="Menu"><strong>Pago a proveedores</strong></a>
+                                    </div>
+                                </div>
+                            </li>
+                            @*<li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy"><strong>Cartas</strong></a>
+                            </li>*@
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index"><strong>Cerrar sesión</strong></a>
+                            </li>
+                        </ul>
+                    </div>
+                }
+
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2021 - LogisticaCAIR - <a asp-area="" asp-controller="Home" asp-action="Index">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+    <script>
+        function MenuC() {
+            window.location.href = "../MenuClientes.cshtml";
+        }
+    </script>
+</body>
+</html>

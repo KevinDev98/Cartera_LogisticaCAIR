@@ -1,0 +1,60 @@
+﻿@model LogisticaCAIR.Models.Usuario
+
+@{
+    ViewData["Title"] = "Editar Usuarios";
+}
+
+<h1 class="text-primary text-center">Edición de usuarios</h1>
+
+<h4>Usuario:  @Html.DisplayFor(model => model.NombreEmpleado)</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Usuarios">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdUsuario" />
+            <div class="form-group">
+                <label asp-for="NombreEmpleado" class="control-label"> Nombre</label>
+                <input asp-for="NombreEmpleado" class="form-control" />
+                <span asp-validation-for="NombreEmpleado" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Username" class="control-label"> Usuario</label>
+                <input asp-for="Username" class="form-control" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Useremail" class="control-label">Dirección de correo electrónico</label>
+                <input asp-for="Useremail" class="form-control" />
+                <span asp-validation-for="Useremail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Perfil" class="control-label">Puesto</label>
+                <select asp-for="Perfil" class="form-control" asp-items="ViewBag.Perfil"></select>
+                <span asp-validation-for="Perfil" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+                <label asp-for="KeyDrive" class="control-label"></label>
+                <input asp-for="KeyDrive" class="form-control" />
+                <span asp-validation-for="KeyDrive" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="Pass" class="control-label">Contraseña</label>
+                <input asp-for="Pass" class="form-control" type="password" />
+                <span asp-validation-for="Pass" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Guardar cambios" class="btn btn-primary" asp-action="Edit"/>
+            </div>
+        </form>
+        <div>
+            <a asp-action="Index">Regresar</a>
+        </div>
+    </div>
+    <div class="col-md-4" style="margin-bottom:-5%">
+        <img src="~/img/logo_cair1.png" class="img-responsive" style="margin-bottom:-5%"/>
+    </div>
+</div>
+
+
+

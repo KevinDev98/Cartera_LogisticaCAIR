@@ -1,0 +1,176 @@
+﻿
+@{
+    ViewData["Title"] = "Configuracion Proveedores";
+}
+@model LogisticaCAIR.Models.CatProveedore
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<meta charset="utf-8" />
+@if (ViewBag.Action == "Create")
+{
+    <h1 class="text-center text-info">PROVEEDORES</h1>
+}
+else if (ViewBag.Action == "Update")
+{
+    <h1 class="text-center text-info">EDICIÓN DEL PROVEEDOR @Html.DisplayFor(model => model.CardName)</h1>
+}
+else
+{
+    <h1 class="text-dark text-center">Eliminar a Proveedor: @Html.DisplayFor(model => model.CardName)</h1>
+}
+<hr />
+<div class="row">
+    @if (ViewBag.Action == "Create" || ViewBag.Action == "Update")
+    {
+        <div class="col-md-6">
+            <form asp-action="Clientes">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="col-md-12">
+                    @if (ViewBag.Action == "Create")
+                    {
+                        <div class="form-group">
+                            <label class="control-label">Clave del proveedor</label>
+                            <input asp-for="CardCode" class="form-control" />
+                            <span asp-validation-for="CardCode" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Nombre</label>
+                            <input asp-for="CardName" class="form-control" />
+                            <span asp-validation-for="CardName" class="text-danger"></span>
+                        </div>
+                    }
+                    else if (ViewBag.Action == "Update")
+                    {
+                        <div class="form-group">
+                            @*<label class="control-label" asp-for="CardCode">Clave del cliente</label>*@
+                            <input asp-for="CardCode" class="form-control" style="visibility:hidden" />
+                            <input asp-for="CardName" class="form-control" style="visibility:hidden" />
+                        </div>
+                    }
+
+                    <div class="form-group">
+                        <label class="control-label">Persona de contacto</label>
+                        <input asp-for="NameContact" class="form-control" />
+                        <span asp-validation-for="NameContact" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Teléfono de contacto 1</label>
+                        <input asp-for="Tel" class="form-control" />
+                        <span asp-validation-for="Tel" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Teléfono de contacto 2 (opcional)</label>
+                        <input asp-for="Tel2" class="form-control" />
+                        <span asp-validation-for="Tel2" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Teléfono de contacto 3 (opcional)</label>
+                        <input asp-for="Tel3" class="form-control" />
+                        <span asp-validation-for="Tel3" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Teléfono de contacto 4 (opcional)</label>
+                        <input asp-for="Tel4" class="form-control" />
+                        <span asp-validation-for="Tel4" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Dirección de correo electrónico</label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="control-label">Dirección de correo electrónico 2 (opcional)</label>
+                        <input asp-for="Email2" class="form-control" />
+                        <span asp-validation-for="Email2" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Dirección de correo electrónico 3 (opcional)</label>
+                        <input asp-for="Email3" class="form-control" />
+                        <span asp-validation-for="Email3" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Dirección de correo electrónico 4 (opcional)</label>
+                        <input asp-for="Email4" class="form-control" />
+                        <span asp-validation-for="Email4" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Dirección de patio</label>
+                        <input asp-for="DirAddressPatios" class="form-control" />
+                        <span asp-validation-for="DirAddressPatios" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Dirección de patio 2 (opcional)</label>
+                        <input asp-for="DirAddressPatios2" class="form-control" />
+                        <span asp-validation-for="DirAddressPatios2" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Dirección de patio 3 (opcional)</label>
+                        <input asp-for="DirAddressPatios3" class="form-control" />
+                        <span asp-validation-for="DirAddressPatios3" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label"> Número de cuenta</label>
+                        <input asp-for="NumCta" class="form-control" />
+                        <span asp-validation-for="NumCta" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Banco</label>
+                        <select asp-for="BancoPreferencia" class="custom-select form-control">
+                            <option value="NINGUNO">Seleccione</option>
+                            <option value="BBVA"> BBVA BANCOMER</option>
+                            <option value="SANTANDER"> SANTANDER</option>
+                            <option value="AZTECA">BANCO AZTECA</option>
+                            <option value="CITIBANAMEX">CITIBANAMEX</option>
+                        </select>
+                        <span asp-validation-for="BancoPreferencia" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @if (ViewBag.Action == "Create")
+                    {
+                        <input type="submit" value="Crear proveedor" class="btn btn-primary" asp-action=Create />
+                    }
+                    else
+                    {
+                        <input type="submit" value="Guardar Cambios" class="btn btn-primary" asp-action="Edit" />
+                    }
+
+                </div>
+            </form>
+            <div>
+                <a asp-action="Index" class="text-info">Regresar</a>
+            </div>
+        </div>
+    }
+    else
+    {
+        <h3 class="text-center">¿Estas seguro de querer eliminar este Proveedor?</h3>
+        <hr />
+        <form asp-action="Clientes">
+            <input type="hidden" asp-for="CardCode" />
+            <input type="submit" value="Elimiar" class="btn btn-danger" asp-action="Delete" />
+            <a asp-action="Index" class="btn btn-light">Cancelar</a>
+        </form>
+    }
+    <div class="col-md-4" style="margin-bottom:-5%">
+        <img src="~/img/logo_cair1.png" class="img-responsive" style="margin-bottom:-5%" />
+    </div>
+    @if (ViewBag.Correcto == "No")
+    {
+        <script>
+            swal("Error!", "@TempData["ErrorConfPv"].ToString()", "error");
+        </script>
+        TempData["ErrorConfPv"] = null;
+    }
+    @if (ViewBag.Correcto == "No error")
+    {
+        <script>
+            swal("Correcto!", "Proceso terminado con exito", "success");
+            setTimeout(function () { window.location.href = "../Proveedores"; }, 2500);
+        </script>
+
+        ViewBag.Correcto = null;
+    }
+</div>
+
